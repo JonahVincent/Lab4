@@ -7,6 +7,7 @@
 // #include "Line.h"
 // #include "Circle.h"
 // #include "Update.h"
+#include <cmath>
 #include "Text.h"
 using CSC2110::String;
 
@@ -60,17 +61,17 @@ DoubleNode<T>* CircularList<T>::find(int index)
    //complete the distance calculations below
    //loc_pos is the index that loc currently points to
    //index is the requested index
-   DoubleNode<T>* node = node;
+   DoubleNode<T>* currNode = loc;
    if (index >= loc_pos)
    {
       //distance without the bridge (next refs, positive
          for (int i = loc_pos; i < index; i++){
-            node = node->getNext();
+            currNode = currNode->getNext();
             dist_next = i;
          }
       //distance using the bridge (prev refs, negative)
       for (int i = loc_pos; i < index; i--){
-            node = node->getPrev();
+            currNode = currNode->getPrev();
             dist_prev = i;
          }
    }
@@ -78,12 +79,12 @@ DoubleNode<T>* CircularList<T>::find(int index)
    {
       //distance without the bridge (prev refs, negative)
       for (int i = loc_pos; i > index; i--){
-         node = node->getPrev();
+         currNode = currNode->getPrev();
          dist_prev = i;
       }
       //distance using the bridge (next refs, positive)
       for (int i = loc_pos; i > index; i++){
-         node = node->getNext();
+         currNode = currNode->getNext();
          dist_next = i;
       }
    }
